@@ -1,0 +1,26 @@
+version: '4.27.1'
+services:
+
+  products:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+    ports:
+      - 8000:8000
+    depends_on:
+      - microservicedb
+      
+  #Database Server
+  microservicedb:
+    image: mysql:8.0
+    ports:
+      - 33060:3306
+    environment:
+      - MYSQL_DATABASE=${DB_DATABASE}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - ./storage/dbdata:/var/lib/mysql
