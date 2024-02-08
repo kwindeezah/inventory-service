@@ -45,8 +45,7 @@ class ProductController extends Controller
 
     public function update(Request $request)
     {
-        $request = $request->all();
-        $product = $this->model->update($request);
+        $product = $this->model->update($request->all());
 
         return response()->json([
             'data' => $product,
